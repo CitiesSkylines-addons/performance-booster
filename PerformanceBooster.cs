@@ -94,4 +94,16 @@ namespace PerformanceBooster
             Mod.ApplyEngineOptimizations();
         }
     }
+
+    [HarmonyPatch(typeof(EconomyManager), "SimulationStepImpl")]
+    public static class EconomyManager_SimulationStepImpl_Patch
+    {
+        public static void Postfix(ref int ___m_taxMultiplier)
+        {
+            if (___m_taxMultiplier < 10000)
+            {
+                ___m_taxMultiplier = 10000;
+            }
+        }
+    }
 }
